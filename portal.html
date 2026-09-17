@@ -20,9 +20,10 @@
           <div id="nameField" class="field" hidden><label for="fullName">담당자명</label><input id="fullName" autocomplete="name" placeholder="홍길동"></div>
           <div class="field"><label for="email">이메일</label><input id="email" type="email" autocomplete="email" required placeholder="name@company.com"></div>
           <div class="field"><label for="password">비밀번호</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="8자 이상"></div>
-          <div class="actions"><button class="btn" id="authSubmit" type="submit">로그인</button><button class="btn ghost" id="toggleAuth" type="button">계정 신청</button></div>
+          <div class="actions"><button class="btn" id="authSubmit" type="submit">로그인</button><button class="btn ghost" id="toggleAuth" type="button">계정 신청</button><button class="btn ghost" id="forgotPassword" type="button">비밀번호 재설정</button></div>
         </form>
         <div id="authMessage" class="message"></div>
+        <form id="passwordResetForm" hidden><h2>새 비밀번호 설정</h2><p class="sub">새 비밀번호를 입력해 주세요.</p><div class="field"><label for="newPassword">새 비밀번호</label><input id="newPassword" type="password" minlength="8" required placeholder="8자 이상"></div><div class="field"><label for="newPasswordConfirm">새 비밀번호 확인</label><input id="newPasswordConfirm" type="password" minlength="8" required placeholder="새 비밀번호를 한 번 더 입력"></div><button class="btn" type="submit">비밀번호 변경</button><div id="resetMessage" class="message"></div></form>
       </div>
 
       <div id="portal" class="portal">
@@ -48,8 +49,8 @@
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.95.3';
     const supabase = createClient('https://ombszlldcfyxxfowqyfx.supabase.co', 'sb_publishable_wiOlSr85u9OiOBLTXhhEjw_Tlcyb7s9');
     const $ = (id) => document.getElementById(id);
-    const authBox = $('authBox'), portal = $('portal'), authForm = $('authForm');
-    let registering = false, profile = null, companies = [];
+    const authBox = $('authBox'), portal = $('portal'), authForm = $('authForm'), passwordResetForm = $('passwordResetForm');
+    let registering = false, recovering = false, profile = null, companies = [];
     const statusName = {booking:'예약',in_transit:'운송 중',transshipment:'환적 중',customs:'통관 중',delivered:'배송 완료',exception:'예외 발생',draft:'작성 중',sent:'발송',accepted:'수락',expired:'만료'};
     const modeName = {sea:'해상',air:'항공'};
     const showMessage = (id, text, error=false) => { const el=$(id); el.textContent=text; el.className='message '+(error?'err':'ok'); };
@@ -57,15 +58,19 @@
     const date = (value) => value ? new Intl.DateTimeFormat('ko-KR').format(new Date(value)) : '-';
     const money = (value,currency) => value === null || value === undefined ? '별도 문의' : new Intl.NumberFormat('ko-KR',{style:'currency',currency:currency||'KRW',maximumFractionDigits:0}).format(value);
 
-    function setAuthMode(next) { registering=next; $('authTitle').textContent=next?'고객 계정 신청':'고객 로그인'; $('authSub').textContent=next?'신청 후 다올 담당자가 고객사를 연결하면 조회 기능을 이용할 수 있습니다.':'다올에서 승인한 계정으로 로그인해 주세요.'; $('nameField').hidden=!next; $('fullName').required=next; $('authSubmit').textContent=next?'계정 신청':'로그인'; $('toggleAuth').textContent=next?'로그인으로 돌아가기':'계정 신청'; $('password').autocomplete=next?'new-password':'current-password'; }
+    function setAuthMode(next) { registering=next; $('authTitle').textContent=next?'고객 계정 신청':'고객 로그인'; $('authSub').textContent=next?'신청 후 다올 담당자가 고객사를 연결하면 조회 기능을 이용할 수 있습니다.':'다올에서 승인한 계정으로 로그인해 주세요.'; $('nameField').hidden=!next; $('nameField').style.display=next?'grid':'none'; $('fullName').required=next; $('authSubmit').textContent=next?'계정 신청':'로그인'; $('toggleAuth').textContent=next?'로그인으로 돌아가기':'계정 신청'; $('password').autocomplete=next?'new-password':'current-password'; }
     $('toggleAuth').addEventListener('click',()=>setAuthMode(!registering));
+    setAuthMode(false);
+    $('forgotPassword').addEventListener('click',async()=>{const email=$('email').value.trim();if(!email)return showMessage('authMessage','비밀번호를 재설정할 이메일을 먼저 입력해 주세요.',true);const {error}=await supabase.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+window.location.pathname});showMessage('authMessage',error?error.message:'비밀번호 재설정 링크를 보냈습니다. 이메일의 링크를 열어 새 비밀번호를 설정해 주세요.',Boolean(error));});
     authForm.addEventListener('submit', async (event)=>{ event.preventDefault(); const email=$('email').value.trim(), password=$('password').value;
       const result = registering ? await supabase.auth.signUp({email,password,options:{data:{full_name:$('fullName').value.trim()},emailRedirectTo:window.location.href}}) : await supabase.auth.signInWithPassword({email,password});
       if(result.error) return showMessage('authMessage',result.error.message,true);
       showMessage('authMessage', registering ? '계정 신청이 완료됐습니다. 바로 로그인되며, 다올 담당자의 고객사 연결 승인을 기다려 주세요.' : '로그인했습니다.');
       if(result.data.session) await loadPortal();
     });
+    passwordResetForm.addEventListener('submit',async event=>{event.preventDefault();const password=$('newPassword').value,confirm=$('newPasswordConfirm').value;if(password!==confirm)return showMessage('resetMessage','새 비밀번호가 일치하지 않습니다.',true);const {error}=await supabase.auth.updateUser({password});if(error)return showMessage('resetMessage',error.message,true);await supabase.auth.signOut();recovering=false;passwordResetForm.hidden=true;authForm.hidden=false;setAuthMode(false);showMessage('authMessage','비밀번호가 변경됐습니다. 새 비밀번호로 로그인해 주세요.');});
     $('signOut').addEventListener('click', async()=>{await supabase.auth.signOut(); profile=null; portal.classList.remove('show');authBox.style.display='block';setAuthMode(false);});
+    supabase.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){recovering=true;portal.classList.remove('show');authBox.style.display='block';authForm.hidden=true;passwordResetForm.hidden=false;}});
 
     async function loadPortal(){
       const {data:{user}}=await supabase.auth.getUser(); if(!user) return;
@@ -100,7 +105,7 @@
     $('companyForm').addEventListener('submit',async e=>{e.preventDefault();const {error}=await supabase.from('companies').insert(formData(e.target));showMessage('adminMessage',error?error.message:'고객사가 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadAdmin();}});
     $('shipmentForm').addEventListener('submit',async e=>{e.preventDefault();const value=formData(e.target);['etd','eta','bl_no','container_no','last_location'].forEach(k=>{if(!value[k])value[k]=null});const {error}=await supabase.from('shipments').insert(value);showMessage('adminMessage',error?error.message:'운송 건이 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadDashboard();}});
     $('quoteForm').addEventListener('submit',async e=>{e.preventDefault();const value=formData(e.target);if(!value.total_amount)value.total_amount=null;if(!value.valid_until)value.valid_until=null;const {error}=await supabase.from('freight_quotes').insert(value);showMessage('adminMessage',error?error.message:'견적이 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadDashboard();}});
-    const {data:{session}}=await supabase.auth.getSession(); if(session) loadPortal();
+    const {data:{session}}=await supabase.auth.getSession(); if(session&&!recovering) loadPortal();
   </script>
 </body>
 </html>
