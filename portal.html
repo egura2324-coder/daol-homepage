@@ -1,0 +1,106 @@
+58883 total
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DAOL 고객 물류포털</title>
+  <meta name="description" content="다올해운항공 고객 전용 운송현황 및 견적 조회 포털">
+  <style>
+    :root{--blue:#1557b0;--ink:#152033;--muted:#62718a;--line:#e3e9f2;--bg:#f5f8fc;--danger:#bd2737;--success:#17775a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.6}button,input,select,textarea{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 24px}header{background:#fff;border-bottom:1px solid var(--line)}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:900;font-size:20px;letter-spacing:.5px;color:var(--blue)}.brand small{font-size:11px;color:var(--muted);font-weight:700;margin-left:8px}.back{color:var(--muted);font-size:14px}.hero{padding:52px 0 32px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:1.4px;color:var(--blue)}h1{margin:7px 0 8px;font-size:clamp(30px,4vw,44px);letter-spacing:-1.8px}.hero p{margin:0;color:var(--muted)}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 10px 24px rgba(21,39,71,.045)}.auth{max-width:500px;margin:4px auto 70px}.auth h2{margin:0 0 5px}.sub{margin:0 0 22px;color:var(--muted);font-size:14px}.field{display:grid;gap:6px;margin:14px 0}.field label{font-weight:750;font-size:13px}.field input,.field select,.field textarea{width:100%;border:1px solid #cfd9e7;border-radius:10px;padding:11px 12px;background:#fff}.field textarea{min-height:82px;resize:vertical}.btn{border:0;border-radius:10px;padding:11px 15px;background:var(--blue);color:white;font-weight:800;cursor:pointer}.btn.ghost{background:#fff;border:1px solid #cbd7e6;color:var(--blue)}.btn.danger{background:var(--danger)}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.message{display:none;margin:14px 0 0;padding:11px 12px;border-radius:9px;font-size:14px}.message.show{display:block}.message.ok{display:block;color:#075d43;background:#e5f8ef}.message.err{display:block;color:#981b2c;background:#ffeaed}.portal{display:none;padding-bottom:70px}.portal.show{display:block}.topline{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin:0 0 20px}.topline h2{margin:0;font-size:27px;letter-spacing:-1px}.topline p{margin:4px 0 0;color:var(--muted);font-size:14px}.notice{margin-bottom:20px;padding:14px 16px;border-radius:12px;background:#fff4d9;color:#795512;font-size:14px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.stat small{color:var(--muted);display:block}.stat strong{font-size:28px;color:var(--blue)}.grid{display:grid;grid-template-columns:1.45fr .9fr;gap:18px}.section-title{font-size:20px;margin:0 0 15px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:14px}.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;white-space:nowrap}.table th{font-size:12px;color:var(--muted);font-weight:800}.table td.desc{white-space:normal;min-width:170px}.badge{display:inline-block;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:800;background:#eaf2ff;color:#1658ae}.event{padding:12px 0;border-bottom:1px solid var(--line)}.event:last-child{border:0}.event small{display:block;color:var(--muted)}.empty{color:var(--muted);font-size:14px;padding:12px 0}.admin{display:none;margin-top:18px}.admin.show{display:block}.admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.form-wide{grid-column:1/-1}.hint{font-size:12px;color:var(--muted);margin:0}.admin-list{max-height:300px;overflow:auto}.admin-row{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:space-between}.admin-row small{display:block;color:var(--muted)}@media(max-width:820px){.cards,.grid,.admin-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-wide{grid-column:auto}.nav{height:64px}.brand small{display:none}}
+  </style>
+</head>
+<body>
+  <header><div class="wrap nav"><div class="brand">DAOL SEA &amp; AIR <small>CUSTOMER PORTAL</small></div><a class="back" href="index.html">← 홈페이지로 돌아가기</a></div></header>
+  <main>
+    <section class="hero"><div class="wrap"><div class="eyebrow">CUSTOMER LOGISTICS INFORMATION</div><h1>다올 고객 물류포털</h1><p>고객사별 운송 진행 현황, 선적 이벤트 및 견적 정보를 안전하게 조회합니다.</p></div></section>
+    <section class="wrap">
+      <div id="authBox" class="panel auth">
+        <h2 id="authTitle">고객 로그인</h2><p id="authSub" class="sub">다올에서 승인한 계정으로 로그인해 주세요.</p>
+        <form id="authForm">
+          <div id="nameField" class="field" hidden><label for="fullName">담당자명</label><input id="fullName" autocomplete="name" placeholder="홍길동"></div>
+          <div class="field"><label for="email">이메일</label><input id="email" type="email" autocomplete="email" required placeholder="name@company.com"></div>
+          <div class="field"><label for="password">비밀번호</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="8자 이상"></div>
+          <div class="actions"><button class="btn" id="authSubmit" type="submit">로그인</button><button class="btn ghost" id="toggleAuth" type="button">계정 신청</button></div>
+        </form>
+        <div id="authMessage" class="message"></div>
+      </div>
+
+      <div id="portal" class="portal">
+        <div class="topline"><div><h2>물류정보 대시보드</h2><p id="welcome">고객님의 최신 물류정보입니다.</p></div><button class="btn ghost" id="signOut">로그아웃</button></div>
+        <div id="approvalNotice" class="notice" hidden>계정은 생성됐습니다. 다올 담당자가 고객사 연결을 승인하면 운송 건과 견적 정보를 조회할 수 있습니다.</div>
+        <div class="cards"><div class="stat"><small>진행 중 운송</small><strong id="activeCount">0</strong></div><div class="stat"><small>전체 운송 건</small><strong id="shipmentCount">0</strong></div><div class="stat"><small>유효 견적</small><strong id="quoteCount">0</strong></div></div>
+        <div class="grid"><div class="panel"><h3 class="section-title">운송 현황</h3><div class="table-wrap"><table class="table"><thead><tr><th>관리번호</th><th>운송</th><th>출발 → 도착</th><th>ETD / ETA</th><th>상태</th></tr></thead><tbody id="shipmentsBody"></tbody></table></div></div><div class="panel"><h3 class="section-title">최근 운송 이벤트</h3><div id="eventsList"></div></div></div>
+        <div class="panel" style="margin-top:18px"><h3 class="section-title">견적 정보</h3><div class="table-wrap"><table class="table"><thead><tr><th>견적번호</th><th>운송</th><th>출발 → 도착</th><th>금액</th><th>유효기간</th><th>상태</th></tr></thead><tbody id="quotesBody"></tbody></table></div></div>
+
+        <div id="adminPanel" class="admin"><div class="topline"><div><h2>다올 관리자 관리</h2><p>고객사 등록, 고객 계정 승인 및 운송·견적 정보 입력</p></div></div>
+          <div class="admin-grid">
+            <div class="panel"><h3 class="section-title">고객사 등록</h3><form id="companyForm"><div class="field"><label>회사명</label><input name="name" required placeholder="고객사명"></div><div class="form-grid"><div class="field"><label>담당자</label><input name="contact_name"></div><div class="field"><label>연락 이메일</label><input name="contact_email" type="email"></div></div><button class="btn" type="submit">고객사 저장</button></form></div>
+            <div class="panel"><h3 class="section-title">가입 계정 승인</h3><p class="hint">고객사가 계정을 신청한 뒤, 해당 고객사를 연결해 주세요.</p><div id="profilesList" class="admin-list"></div></div>
+            <div class="panel"><h3 class="section-title">운송 건 등록</h3><form id="shipmentForm"><div class="form-grid"><div class="field"><label>고객사</label><select name="company_id" class="company-select" required></select></div><div class="field"><label>관리번호</label><input name="reference_no" required placeholder="DAOL-2026-0001"></div><div class="field"><label>운송 방식</label><select name="mode"><option value="sea">해상</option><option value="air">항공</option></select></div><div class="field"><label>상태</label><select name="status"><option value="booking">예약</option><option value="in_transit">운송 중</option><option value="transshipment">환적 중</option><option value="customs">통관 중</option><option value="delivered">배송 완료</option><option value="exception">예외 발생</option></select></div><div class="field"><label>출발지</label><input name="origin" required></div><div class="field"><label>도착지</label><input name="destination" required></div><div class="field"><label>B/L 또는 AWB</label><input name="bl_no"></div><div class="field"><label>컨테이너 번호</label><input name="container_no"></div><div class="field"><label>ETD</label><input name="etd" type="date"></div><div class="field"><label>ETA</label><input name="eta" type="date"></div><div class="field form-wide"><label>최근 위치</label><input name="last_location"></div></div><button class="btn" type="submit">운송 건 저장</button></form></div>
+            <div class="panel"><h3 class="section-title">견적 등록</h3><form id="quoteForm"><div class="form-grid"><div class="field"><label>고객사</label><select name="company_id" class="company-select" required></select></div><div class="field"><label>견적번호</label><input name="quote_no" required placeholder="QT-2026-0001"></div><div class="field"><label>운송 방식</label><select name="mode"><option value="sea">해상</option><option value="air">항공</option></select></div><div class="field"><label>상태</label><select name="status"><option value="sent">발송</option><option value="draft">작성 중</option><option value="accepted">수락</option><option value="expired">만료</option></select></div><div class="field"><label>출발지</label><input name="origin" required></div><div class="field"><label>도착지</label><input name="destination" required></div><div class="field"><label>통화</label><input name="currency" value="KRW" required></div><div class="field"><label>총액</label><input name="total_amount" type="number" min="0" step="1"></div><div class="field form-wide"><label>유효기간</label><input name="valid_until" type="date"></div></div><button class="btn" type="submit">견적 저장</button></form></div>
+          </div>
+          <div id="adminMessage" class="message"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.95.3';
+    const supabase = createClient('https://ombszlldcfyxxfowqyfx.supabase.co', 'sb_publishable_wiOlSr85u9OiOBLTXhhEjw_Tlcyb7s9');
+    const $ = (id) => document.getElementById(id);
+    const authBox = $('authBox'), portal = $('portal'), authForm = $('authForm');
+    let registering = false, profile = null, companies = [];
+    const statusName = {booking:'예약',in_transit:'운송 중',transshipment:'환적 중',customs:'통관 중',delivered:'배송 완료',exception:'예외 발생',draft:'작성 중',sent:'발송',accepted:'수락',expired:'만료'};
+    const modeName = {sea:'해상',air:'항공'};
+    const showMessage = (id, text, error=false) => { const el=$(id); el.textContent=text; el.className='message '+(error?'err':'ok'); };
+    const escapeHtml = (value='') => String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const date = (value) => value ? new Intl.DateTimeFormat('ko-KR').format(new Date(value)) : '-';
+    const money = (value,currency) => value === null || value === undefined ? '별도 문의' : new Intl.NumberFormat('ko-KR',{style:'currency',currency:currency||'KRW',maximumFractionDigits:0}).format(value);
+
+    function setAuthMode(next) { registering=next; $('authTitle').textContent=next?'고객 계정 신청':'고객 로그인'; $('authSub').textContent=next?'신청 후 다올 담당자가 고객사를 연결하면 조회 기능을 이용할 수 있습니다.':'다올에서 승인한 계정으로 로그인해 주세요.'; $('nameField').hidden=!next; $('fullName').required=next; $('authSubmit').textContent=next?'계정 신청':'로그인'; $('toggleAuth').textContent=next?'로그인으로 돌아가기':'계정 신청'; $('password').autocomplete=next?'new-password':'current-password'; }
+    $('toggleAuth').addEventListener('click',()=>setAuthMode(!registering));
+    authForm.addEventListener('submit', async (event)=>{ event.preventDefault(); const email=$('email').value.trim(), password=$('password').value;
+      const result = registering ? await supabase.auth.signUp({email,password,options:{data:{full_name:$('fullName').value.trim()},emailRedirectTo:window.location.href}}) : await supabase.auth.signInWithPassword({email,password});
+      if(result.error) return showMessage('authMessage',result.error.message,true);
+      showMessage('authMessage', registering ? '계정 신청이 완료됐습니다. 이메일 인증 후 다올 담당자의 승인을 기다려 주세요.' : '로그인했습니다.');
+      if(result.data.session) await loadPortal();
+    });
+    $('signOut').addEventListener('click', async()=>{await supabase.auth.signOut(); profile=null; portal.classList.remove('show');authBox.style.display='block';setAuthMode(false);});
+
+    async function loadPortal(){
+      const {data:{user}}=await supabase.auth.getUser(); if(!user) return;
+      const {data:currentProfile,error:profileError}=await supabase.from('profiles').select('*').eq('id',user.id).single();
+      if(profileError) return showMessage('authMessage','프로필을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.',true);
+      profile=currentProfile; authBox.style.display='none'; portal.classList.add('show'); $('welcome').textContent=`${profile.full_name || profile.email}님, 고객사별 정보만 표시됩니다.`;
+      $('approvalNotice').hidden=Boolean(profile.company_id || profile.role==='admin');
+      await Promise.all([loadDashboard(), profile.role==='admin'?loadAdmin():Promise.resolve()]);
+    }
+    async function loadDashboard(){
+      const [{data:shipments,error:shipmentsError},{data:quotes,error:quotesError}] = await Promise.all([
+        supabase.from('shipments').select('*, shipment_events(*)').order('updated_at',{ascending:false}),
+        supabase.from('freight_quotes').select('*').order('updated_at',{ascending:false})
+      ]);
+      if(shipmentsError || quotesError){ console.error(shipmentsError||quotesError); return; }
+      const list=shipments||[], quoteList=quotes||[]; $('shipmentCount').textContent=list.length; $('activeCount').textContent=list.filter(x=>!['delivered','exception'].includes(x.status)).length; $('quoteCount').textContent=quoteList.filter(x=>x.status!=='expired').length;
+      $('shipmentsBody').innerHTML=list.length?list.map(x=>`<tr><td>${escapeHtml(x.reference_no)}</td><td>${modeName[x.mode]||x.mode}<br><small>${escapeHtml(x.vessel_or_flight||x.carrier||'-')}</small></td><td>${escapeHtml(x.origin)} → ${escapeHtml(x.destination)}</td><td>${date(x.etd)}<br><small>${date(x.eta)}</small></td><td><span class="badge">${statusName[x.status]||x.status}</span></td></tr>`).join(''):'<tr><td colspan="5" class="empty">등록된 운송 건이 없습니다.</td></tr>';
+      const events=list.flatMap(s=>(s.shipment_events||[]).map(e=>({...e,reference_no:s.reference_no}))).sort((a,b)=>new Date(b.event_at)-new Date(a.event_at)).slice(0,8);
+      $('eventsList').innerHTML=events.length?events.map(e=>`<div class="event"><strong>${escapeHtml(e.reference_no)} · ${escapeHtml(e.event_type)}</strong><small>${date(e.event_at)}${e.location?' · '+escapeHtml(e.location):''}</small>${e.description?`<div>${escapeHtml(e.description)}</div>`:''}</div>`).join(''):'<div class="empty">표시할 운송 이벤트가 없습니다.</div>';
+      $('quotesBody').innerHTML=quoteList.length?quoteList.map(x=>`<tr><td>${escapeHtml(x.quote_no)}</td><td>${modeName[x.mode]||x.mode}</td><td>${escapeHtml(x.origin)} → ${escapeHtml(x.destination)}</td><td>${money(x.total_amount,x.currency)}</td><td>${date(x.valid_until)}</td><td><span class="badge">${statusName[x.status]||x.status}</span></td></tr>`).join(''):'<tr><td colspan="6" class="empty">등록된 견적 정보가 없습니다.</td></tr>';
+    }
+    async function loadAdmin(){
+      $('adminPanel').classList.add('show');
+      const [{data:companyRows,error:companyError},{data:profiles,error:profilesError}] = await Promise.all([supabase.from('companies').select('*').order('name'),supabase.from('profiles').select('*').order('created_at',{ascending:false})]);
+      if(companyError||profilesError){showMessage('adminMessage','관리자 정보를 불러오지 못했습니다.',true);return;}
+      companies=companyRows||[]; const options='<option value="">고객사를 선택하세요</option>'+companies.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join(''); document.querySelectorAll('.company-select').forEach(el=>el.innerHTML=options);
+      $('profilesList').innerHTML=(profiles||[]).map(p=>`<div class="admin-row"><div><strong>${escapeHtml(p.full_name||'이름 미입력')}</strong><small>${escapeHtml(p.email)}${p.company_id?' · 연결됨':' · 승인 대기'}</small></div><select data-profile="${p.id}"><option value="">고객사 선택</option>${companies.map(c=>`<option value="${c.id}" ${p.company_id===c.id?'selected':''}>${escapeHtml(c.name)}</option>`).join('')}</select></div>`).join('')||'<div class="empty">신청된 계정이 없습니다.</div>';
+      document.querySelectorAll('[data-profile]').forEach(select=>select.addEventListener('change',async()=>{if(!select.value)return;const {error}=await supabase.from('profiles').update({company_id:select.value}).eq('id',select.dataset.profile);showMessage('adminMessage',error?error.message:'고객사 연결을 저장했습니다.',Boolean(error));if(!error)await loadAdmin();}));
+    }
+    function formData(form){return Object.fromEntries(new FormData(form).entries());}
+    $('companyForm').addEventListener('submit',async e=>{e.preventDefault();const {error}=await supabase.from('companies').insert(formData(e.target));showMessage('adminMessage',error?error.message:'고객사가 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadAdmin();}});
+    $('shipmentForm').addEventListener('submit',async e=>{e.preventDefault();const value=formData(e.target);['etd','eta','bl_no','container_no','last_location'].forEach(k=>{if(!value[k])value[k]=null});const {error}=await supabase.from('shipments').insert(value);showMessage('adminMessage',error?error.message:'운송 건이 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadDashboard();}});
+    $('quoteForm').addEventListener('submit',async e=>{e.preventDefault();const value=formData(e.target);if(!value.total_amount)value.total_amount=null;if(!value.valid_until)value.valid_until=null;const {error}=await supabase.from('freight_quotes').insert(value);showMessage('adminMessage',error?error.message:'견적이 등록되었습니다.',Boolean(error));if(!error){e.target.reset();await loadDashboard();}});
+    const {data:{session}}=await supabase.auth.getSession(); if(session) loadPortal();
+  </script>
+</body>
+</html>
