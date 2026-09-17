@@ -20,7 +20,7 @@
           <div id="nameField" class="field" hidden><label for="fullName">담당자명</label><input id="fullName" autocomplete="name" placeholder="홍길동"></div>
           <div class="field"><label for="email">이메일</label><input id="email" type="email" autocomplete="email" required placeholder="name@company.com"></div>
           <div class="field"><label for="password">비밀번호</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="8자 이상"></div>
-          <div class="actions"><button class="btn" id="authSubmit" type="submit">로그인</button><button class="btn ghost" id="toggleAuth" type="button">계정 신청</button><button class="btn ghost" id="resendConfirm" type="button">인증 메일 재발송</button></div>
+          <div class="actions"><button class="btn" id="authSubmit" type="submit">로그인</button><button class="btn ghost" id="toggleAuth" type="button">계정 신청</button></div>
         </form>
         <div id="authMessage" class="message"></div>
       </div>
@@ -59,11 +59,10 @@
 
     function setAuthMode(next) { registering=next; $('authTitle').textContent=next?'고객 계정 신청':'고객 로그인'; $('authSub').textContent=next?'신청 후 다올 담당자가 고객사를 연결하면 조회 기능을 이용할 수 있습니다.':'다올에서 승인한 계정으로 로그인해 주세요.'; $('nameField').hidden=!next; $('fullName').required=next; $('authSubmit').textContent=next?'계정 신청':'로그인'; $('toggleAuth').textContent=next?'로그인으로 돌아가기':'계정 신청'; $('password').autocomplete=next?'new-password':'current-password'; }
     $('toggleAuth').addEventListener('click',()=>setAuthMode(!registering));
-    $('resendConfirm').addEventListener('click', async()=>{const email=$('email').value.trim();if(!email)return showMessage('authMessage','인증받을 이메일을 먼저 입력해 주세요.',true);const {error}=await supabase.auth.resend({type:'signup',email,options:{emailRedirectTo:window.location.href}});showMessage('authMessage',error?error.message:'인증 메일을 다시 보냈습니다. 메일함과 스팸함을 확인해 주세요.',Boolean(error));});
     authForm.addEventListener('submit', async (event)=>{ event.preventDefault(); const email=$('email').value.trim(), password=$('password').value;
       const result = registering ? await supabase.auth.signUp({email,password,options:{data:{full_name:$('fullName').value.trim()},emailRedirectTo:window.location.href}}) : await supabase.auth.signInWithPassword({email,password});
       if(result.error) return showMessage('authMessage',result.error.message,true);
-      showMessage('authMessage', registering ? '계정 신청이 완료됐습니다. 이메일 인증 후 다올 담당자의 승인을 기다려 주세요.' : '로그인했습니다.');
+      showMessage('authMessage', registering ? '계정 신청이 완료됐습니다. 바로 로그인되며, 다올 담당자의 고객사 연결 승인을 기다려 주세요.' : '로그인했습니다.');
       if(result.data.session) await loadPortal();
     });
     $('signOut').addEventListener('click', async()=>{await supabase.auth.signOut(); profile=null; portal.classList.remove('show');authBox.style.display='block';setAuthMode(false);});
